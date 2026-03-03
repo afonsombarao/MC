@@ -45,3 +45,21 @@ end
 
 x
 
+% (c)
+
+% variacao do método de newton x_n+1 = h(x_n) = x_n - f(x_n)/f'(x_0)
+
+x0 = [-1.2; -0.2; 1; 2];
+
+h0 = @(x) x - f(x) ./ dfdx(x0);
+
+y = x0;
+
+B = y;
+
+for i = 1:5
+    y = h0(y);
+    B = [B, y];
+end
+
+y
