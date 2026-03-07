@@ -1,21 +1,21 @@
-function [x1,x2,A,t] = Algoritmo1(x1,x2,eps,k)
+function [x1,x2,t,A] = Algoritmo1(x1,x2,eps,k)
 
 t=".";
 a=[0 0];
 x=[x1 x2];
-j=@(x1,x2)([4.*x1.^3+4.*x1.*x2-42.*x1+2.*x2.^2-14;4.*x2.^3+4.*x1.*x2-26.*x2+2.*x1.^2-22]);
-h=@(x1,x2)([12.*x1.^2+4.*x2-42 4.*x1+4.*x2;4.*x1+4.*x2 12.*x2.^2+4.*x1-26]);
+j=@(p,q)([4.*p.^3+4.*p.*q-42.*p+2.*q.^2-14;4.*q.^3+4.*p.*q-26.*q+2.*p.^2-22]);
+h=@(p,q)([12.*p.^2+4.*q-42 4.*p+4.*q;4.*p+4.*q 12.*q.^2+4.*p-26]);
 A=h(x1,x2);
 for iter=1:k
 
     if norm(x-a,inf)<eps
-        if det(H)>0
-                if trace(H)>0
+        if det(A)>0
+                if trace(A)>0
                     t="minimo";
                 else
                     t="maximo";
                 end    
-            elseif det(H)<0
+            elseif det(A)<0
                 t="pontodesela";
             else
                 t="indeterminado";
@@ -25,10 +25,15 @@ for iter=1:k
     else
 
         a=x;
-        s=-(inv(A)*J);
+        s=-((inv(A))*j(x(1),x(2)));
 
-        x=x+s;
-        y=j(x)-j(a);
+        x=x-s;
+        y=j(x(1),x(2))-j(a(1),a(2));
+
+        A=A+(((y-A*s)*((y-(A*(s)))'))/((y-A*(s))'*s));
+    end
+
+end
 
         A=A+(((y-A*s)*((y-(A*(s)))'))/((y-A*(s))'*(x-a)));
     end
