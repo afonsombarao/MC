@@ -1,4 +1,4 @@
-function [x,t,iter] = Algoritmo1(x1,x2,eps,k)
+function [x,t,iter,matriz] = Algoritmo1c(x1,x2,eps,k)
 
 t=".";
 a=[0;0];
@@ -6,6 +6,7 @@ x=[x1;x2];
 j=@(p,q)([4.*p.^3+4.*p.*q-42.*p+2.*q.^2-14;4.*q.^3+4.*p.*q-26.*q+2.*p.^2-22]);
 h=@(p,q)([12.*p.^2+4.*q-42 4.*p+4.*q;4.*p+4.*q 12.*q.^2+4.*p-26]);
 A=h(x1,x2);
+matriz= zeros(2,k);
 
 for iter=1:k
     if norm(x-a,inf)<eps
@@ -21,6 +22,7 @@ for iter=1:k
             else
                 t="indeterminado";
         end
+        matriz = matriz(:, 1:iter); 
         return;
        
     else
@@ -32,6 +34,7 @@ for iter=1:k
 
         A=A+(((y-A*s)*((y-(A*(s)))'))/((y-A*(s))'*s));
         J=j(x(1),x(2));
+        matriz(:, iter) = x;
      
     end
 
