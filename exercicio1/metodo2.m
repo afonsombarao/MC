@@ -1,12 +1,12 @@
-function [xn1] = metodo2(epsilon, x0)
+function [xn, A] = metodo2(k, x0)
+xn = x0;
+g = @(x) x.^4/10 + sin(4*x); 
+Psi = @(x) (x.*g(g(x))-g(x).^2)./(g(g(x))-2*g(x)+x);
+%xn1 = Psi(xn);
+A = [xn]%,xn1]
 
-xn = x0; % atribuicao da variavel iterativa
-g = @(x) x.^4/10 + sin(4*x); % funcao que queremos aproximar os pontos fixos
-Psi = @(x) (x.*g(g(x))-g(x).^2)./(g(g(x))-2*g(x)+x); % funcao iteradora do metodo 2
-xn1 = Psi(xn);
-
-% ciclo que calcula o proximo ponto ate ter |xn1 - xn|<= epsilon
-while abs(xn - xn1) > epsilon
-    xn = xn1;
-    xn1 = Psi(xn);
+for i=1:k
+    %xn = xn1;
+    xn = Psi(xn);
+    A = [A,xn]
 end
