@@ -101,15 +101,15 @@ d = ones(4,1) - dfdx(z)./dfdx(x0)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % experimentacao de varios valores iniciais para o metodo (2)
-[x] = metodo2(10^-8, -0.5)
-[x] = metodo2(10^-8, -0.05)
-[x] = metodo2(10^-8, 0.6)
-[x] = metodo2(10^-8, 1.7)
-[x] = metodo2(10^-8, -1.2)
-[x] = metodo2(10^-8, -0.2)
-[x] = metodo2(10^-8, 1.0)
-[x] = metodo2(10^-8, 2.0)
-[x] = metodo2(10^-8, 10.0)
+[x, A] = metodo2eps(10^-8, -0.5)
+[x, A] = metodo2eps(10^-8, -0.05)
+[x, A] = metodo2eps(10^-8, 0.6)
+[x, A] = metodo2eps(10^-8, 1.7)
+[x, A] = metodo2eps(10^-8, -1.2)
+[x, A] = metodo2eps(10^-8, -0.2)
+[x, A] = metodo2eps(10^-8, 1.0)
+[x, A] = metodo2eps(10^-8, 2.0)
+[x, A] = metodo2eps(10^-8, 10.0)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -143,11 +143,12 @@ abs(z1 - xn1)./abs(z1 - xn) % estimativa
 dh1dx(z1) % valor teorico
 
 % estimativa para o metodo 2
-[xn] = metodo2(10^-11, x0); % correr o metodo 2 ate ter |xn-xn1|<epsilon
+[xn] = metodo2k(10, x0); % correr o metodo 2 k vezes
 xn1 = Psi(xn);
-abs(z1 - xn1)./abs(z1 - xn) % estimativa
+abs(z1 - xn1)./abs(z1 - xn) % estimativa. dependendo de k a estimativa vai ter valores completamente diferentes.
 % o valor teorico foi calculado na alinea anterio e corresponde a Psi'(z1)=0
 
+e = abs(z1*ones(1,11)-A) % erro das iteradas
 
 
 
