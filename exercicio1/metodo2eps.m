@@ -7,6 +7,6 @@ A = [xn,xn1]
 
 while abs(xn1 - xn) > epsilon
     xn = xn1;
-    xn1 = h(xn);
+    xn1 = Psi(xn);
     A = [A,xn1];
 end
