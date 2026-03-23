@@ -1,0 +1,31 @@
+%a
+%criar o grafico com as 5 funções
+%i
+q = @(x) -1 + 0*x; 
+r = @(x) x;
+
+%solução exata do enunciado
+yr = @(x) (exp(1+x) + x - x*exp(2) - exp(1-x)) / (exp(2) - 1);
+
+x = linspace(0,1, 1000);%tenho de experimentar mais valores q me parecem interessantes
+
+figure;
+hold on;
+
+for n = 0:3
+    u= metodo1(n, q, r);
+    ulista = arrayfun(u,x);
+    
+    %plot das aproximações
+    plot(x, ulista, 'LineWidth', 1, 'DisplayName', ['n = ' num2str(n)]);
+end
+
+%plot da solução exata
+plot(x, yr(x), 'w--', 'LineWidth', 1, 'DisplayName', 'Exata');
+
+xlabel('x');
+ylabel('y(x)');
+title('Comparação: Método 1 vs Solução Exata (Problema i)');
+legend('Location', 'best');
+grid on;
+hold off;
