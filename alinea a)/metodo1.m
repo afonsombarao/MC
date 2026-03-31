@@ -1,6 +1,3 @@
-%mind you isto é fixeiro function e tamebm pus o codigo para dar plot noutro coiso
-
-
 function [u] = metodo1(n,q,r)
 
 
