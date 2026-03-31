@@ -1,4 +1,4 @@
-function [x, y] = rugekuntta(h,x0,y0,F,k)
+function [x, y] = rungekutta(h,x0,y0,F,k)
 tn = 0;
 x = [x0];
 xn = x0;
